@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import authImg from "../../../assets/auth-img-2.png";
-import LogIn from "../../helper/LogIn";
-import Register from "../../helper/Register";
+import authImg from "../../assets/auth-img-2.png";
+import Footer from "../../components/helper/Footer";
+import LogIn from "../../components/helper/LogIn";
+import Register from "../../components/helper/Register";
 const Auth = () => {
   const [state, setState] = useState(false);
   const stateHandler = () => {
@@ -10,6 +11,7 @@ const Auth = () => {
   };
   return (
     <Wrapper>
+      {/* <Footer */}
       <div className="container">
         <div className="left">
           <h2>
