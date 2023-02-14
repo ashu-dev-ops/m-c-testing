@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: montserrat;
+  font-family: sans-serif montserrat;
   /* font-weight: 700; */
 }
 body {
@@ -131,9 +131,9 @@ p {
 }
 
 /* temp nav-bar */
-.nav-bar {
+/* .nav-bar {
   width: 100%;
-  /* color: white; */
+  color: white;
   display: flex;
   justify-content: space-between;
   padding: 1rem;
@@ -141,4 +141,4 @@ p {
 .nav-bar a {
   color: white;
   text-decoration: none;
-}
+} */
