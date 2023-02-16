@@ -1,10 +1,14 @@
-import React from "react";
-import Hero from "./landingSections/Hero";
+import "./style.css";
+import Section1 from "./landingSections/section_1";
+import VideoSection from "./landingSections/video_section";
+import Footer from "./landingSections/footer";
 
 const Landing = () => {
   return (
     <div>
-      <Hero />
+      <Section1 class="section"/>
+      <VideoSection class="section"/>
+      <Footer />
     </div>
   );
 };
