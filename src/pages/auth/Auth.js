@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import authImg from "../../assets/auth-img-2.png";
-import Footer from "../../components/helper/Footer";
+// import Footer from "../../components/helper/Footer";
 import LogIn from "../../components/helper/LogIn";
 import Register from "../../components/helper/Register";
 const Auth = () => {
@@ -20,6 +20,7 @@ const Auth = () => {
           <img src={authImg} alt="" />
         </div>
         <div className="right">
+          <img src={authImg} alt="" />
           <div className="form-container">
             {state ? <LogIn /> : <Register />}
             <div>
@@ -66,6 +67,9 @@ const Wrapper = styled.section`
     .right {
       display: flex;
       width: 50%;
+      img {
+        display: none;
+      }
       .form-container {
         width: 80%;
         /* background-color:
@@ -101,6 +105,28 @@ const Wrapper = styled.section`
       }
     }
     /* margin: 1rem auto; */
+  }
+  @media (max-width: 600px) {
+    .container {
+      .left {
+        display: none;
+      }
+      .right {
+        width: 100%;
+        padding: 0;
+        position: relative;
+        flex-direction: column;
+        img {
+          position: absolute;
+          height: 5rem;
+          width: 7rem;
+          display: flex;
+          top: 1%;
+          margin: 0 auto;
+          position: relative;
+        }
+      }
+    }
   }
 `;
 export default Auth;
