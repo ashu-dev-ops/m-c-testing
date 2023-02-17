@@ -5,6 +5,8 @@ import Navbar from "./components/helper/Navbar";
 import Auth from "./pages/auth/Auth";
 import ChatPage from "./pages/chatPage/ChatPage";
 import Landing from "./pages/landing/Landing";
+import "./fonts/Barlow/Barlow.font.css";
+import "./fonts/Montserrat/Montserrat.font.css"
 
 const App = () => {
   return (
