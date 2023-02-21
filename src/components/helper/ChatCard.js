@@ -2,10 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import dummuPic from "../../assets/dummy-pic.jpeg";
-import { setCurrentChats } from "../../feature/ChatPageSlice";
 import { useDispatch, useSelector } from "react-redux";
-const ChatCard = ({ data: n2 }) => {
-  console.log(n2._id);
+
+
+const ChatCard = ({ name, Id }) => {
+  console.log(name + " : " + Id);
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.user);
   // console.log(data.members[1]);
@@ -29,13 +30,12 @@ const ChatCard = ({ data: n2 }) => {
   //     // console.log(data);
   //     dispatch(setCurrentChats(data));
   //   };
-  console.log("ye chal raha")
-  console.log(n2._id);
   const onChat = async () => {
     try {
+      console.log(user)
       const { data } = await axios.post("http://localhost:3000/api/chat", {
-        senderId: user.user.id,
-        receiverId: n2._id,
+        senderId: user.userId,
+        receiverId: Id,
       });
       console.log(data);
     } catch (error) {
@@ -44,13 +44,10 @@ const ChatCard = ({ data: n2 }) => {
   };
   return (
     <Wrapper>
-      <div
-        className="person-card"
-        //   onClick={fetchChat}
-      >
+      <div className="person-card">
         <div className="detail">
           <img src={dummuPic} alt="" />
-          <h5>{n2.name}</h5>
+          <h5>{name}</h5>
         </div>
 
         <button onClick={onChat}>chat</button>

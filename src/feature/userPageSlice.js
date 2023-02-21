@@ -1,92 +1,122 @@
 import {
-  createSlice,
-  configureStore,
-  createAsyncThunk,
+    createSlice,
+    configureStore,
+    createAsyncThunk,
 } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 import {
-  addUserToLocalStorage,
-  getUserFromLocalStorage,
-  removeUserFromLocalStorage,
+    addUserToLocalStorage,
+    getUserFromLocalStorage,
+    removeUserFromLocalStorage,
 } from "../util/localStorage";
+
+
+
 const initialState = {
-  logIn: false,
-    user: getUserFromLocalStorage()||{},
-//   user: {},
+    logIn: false,
+    user: getUserFromLocalStorage().user,
+    //   user: {},
 };
+
+
 export const registerUser = createAsyncThunk(
-  "user/registerUser",
-  async (user, thunkAPI) => {
-    try {
-      const resp = await axios.post(
-        "http://localhost:3000/api/auth/sign-up",
-        user
-      );
-      return resp.data;
-    } catch (error) {
-      console.log(error);
+    "user/registerUser",
+    async (user, thunkAPI) => {
+        try {
+            const resp = await axios.post(
+                "http://localhost:3000/api/auth/sign-up",
+                user
+            );
+            return resp.data;
+        } catch (error) {
+            if(error.response.data){
+                return thunkAPI.rejectWithValue(error.response.data);
+            }
+            return thunkAPI.rejectWithValue(error.message);
+        }
     }
-  }
 );
 export const loginUser = createAsyncThunk(
-  "user/loginUser",
-  async (user, thunkAPI) => {
-    // return console.log(`logged in user ${JSON.stringify(user)}`);
-    try {
-      console.log("running");
-      const resp = await axios.post(
-        "http://localhost:3000/api/auth/sign-in",
-        user
-      );
-      return resp.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.msg);
+    "user/loginUser",
+    async (user, thunkAPI) => {
+        // return console.log(`logged in user ${JSON.stringify(user)}`);
+        try {
+            console.log("running");
+            const resp = await axios.post(
+                "http://localhost:3000/api/auth/sign-in",
+                user
+            );
+            return resp.data;
+        } catch (error) {
+            if(error.response.data){
+                return thunkAPI.rejectWithValue(error.response.data);
+            }
+            return thunkAPI.rejectWithValue(error.message);
+        }
     }
-
-    //   return loginUserThunk('/auth/login', user, thunkAPI);
-  }
 );
+
 const userSlice = createSlice({
-  name: "counter",
-  initialState: initialState,
-  reducers: {
-    // incremented: (state) => {},
-    // decremented: (state) => {},
-    setLogIn: (state) => {
-      state.logIn = true;
+    name: "user",
+    initialState: initialState,
+    reducers: {
+        setLogIn: (state) => {
+            state.logIn = true;
+        },
+        setLogInFalse: (state) => {
+            state.logIn = false;
+        },
+        // setUser:(state,{payload:{name}})
     },
-    setLogInFalse: (state) => {
-      state.logIn = false;
+    extraReducers: (builder) => {
+        builder
+            .addCase(registerUser.fulfilled, (state, { payload }) => {
+                console.log(payload);
+                state.logIn = true;
+                state.user = payload.user;
+                addUserToLocalStorage(payload);
+                toast.success("Welcome " + payload.user.userName, {
+                    position: "bottom-right"
+                })
+            })
+            .addCase(registerUser.rejected, (state, { payload }) => {
+                let error;
+                if(typeof payload === "object"){
+                    //do something on error json
+                    error = payload[Object.keys(payload)[0]];
+                }
+                else{
+                    error = payload;
+                }
+                toast.error(error, {
+                    position: "bottom-right"
+                });
+            })
+            .addCase(loginUser.fulfilled, (state, { payload }) => {
+                console.log(payload);
+                state.logIn = true;
+                state.user = payload.user;
+                removeUserFromLocalStorage();
+                addUserToLocalStorage(payload);
+                toast.success("Welcome " + payload.user.userName, {
+                    position: "bottom-right"
+                });
+            })
+            .addCase(loginUser.rejected, (state, { payload }) => {
+                let error;
+                if(typeof payload === "object"){
+                    //do something on error json
+                    error = payload[Object.keys(payload)[0]];
+                }
+                else{
+                    error = payload;
+                }
+                toast.error(error, {
+                    position: "bottom-right"
+                });
+            });
     },
-    // setUser:(state,{payload:{name}})
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(registerUser.fulfilled, (state, { payload }) => {
-        const { data } = payload;
-        console.log(data);
-        state.logIn = true;
-        console.log(data);
-        // removeUserFromLocalStorage();
-        addUserToLocalStorage(data);
-      })
-      .addCase(loginUser.fulfilled, (state, { payload }) => {
-        const data = payload;
-        state.logIn = true;
-        console.log(data);
-        removeUserFromLocalStorage();
-        addUserToLocalStorage(data);
-      })
-      .addCase(loginUser.rejected, (state, { payload }) => {
-        toast.error(payload);
-        // const data = payload;
-        // state.logIn = true;
-        // console.log(data);
-        // removeUserFromLocalStorage();
-        // addUserToLocalStorage(data);
-      });
-  },
 });
 
 export const { setLogIn, setLogInFalse } = userSlice.actions;

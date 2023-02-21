@@ -2,33 +2,40 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import dummuPic from "../../assets/dummy-pic.jpeg";
-import { setCurrentChats } from "../../feature/ChatPageSlice";
-import { useDispatch } from "react-redux";
-const PersonCard = ({ data: n1 }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { setChatId, setChatMessages } from "../../feature/chatSlice";
+
+
+
+const PersonCard = (props) => {
   const dispatch = useDispatch();
-  // console.log(data.members[1]);
   const [person, setPerson] = useState([]);
-  // console.log(data[0]);
-  // console.log(n1._id);
+  const {user} = useSelector(store => store.user);
+
+
   const getUser = async () => {
-    console.log(n1._id);
+    const otherUser = props.members[0] == user.userId ? props.members[1] : props.members[0];
     const { data } = await axios.get(
-      `http://localhost:3000/api/user/update-user/${n1._id}`
+      `http://localhost:3000/api/user/update-user/${otherUser}`
     );
     setPerson(data);
-    // console.log(n1._id);
   };
+
   useEffect(() => {
     getUser();
   }, []);
-  // console.log(data[1]);
+
+  
   const fetchChat = async () => {
-    console.log("run");
-    const { data } = await axios.get(
-      `http://localhost:3000/api/message/${n1._id}`
-    );
-    console.log(data);
-    dispatch(setCurrentChats(data));
+    dispatch(setChatId(props.chatId));
+    try{
+      const { data } = await axios.get(
+        `http://localhost:3000/api/message/${props.chatId}`
+      );
+      dispatch(setChatMessages(data));
+    } catch(err){
+      console.log(err);
+    }
   };
   return (
     <Wrapper>

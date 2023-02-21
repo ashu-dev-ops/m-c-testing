@@ -1,34 +1,37 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import styled from "styled-components";
 import Message from "../../components/helper/Message";
+import { addChatMessage } from "../../feature/chatSlice";
+
 
 const CurrentChat = () => {
-  const { currentChats } = useSelector((store) => store.chatpage);
+  const chat = useSelector((store) => store.chat);
   const { user } = useSelector((store) => store.user);
-  //   const { user } = useSelector((store) => store.user);
-    console.log(currentChats);
-  //   const chatId = currentChats[0]?.chatId;
-  //   console.log(chatId);
-  //   const [chat, setChat] = useState(null);
   const [msg, setMsg] = useState("");
+  const dispatch = useDispatch();
+
+  console.log(chat);
+
+
   const handlMsgeSubmit = async () => {
     try {
       console.log();
-      //   const { data } = await axios.post("http://localhost:3000/api/message/", {
-      //     chatId: chatId,
-      //     senderId: user.user.id,
-      //     text: msg,
-      //   });
-      //   console.log(data);
-      console.log(msg);
-    } catch (error) {}
+        const { data } = await axios.post("http://localhost:3000/api/message/", {
+          chatId: chat.Id,
+          senderId: user.userId,
+          text: msg,
+        });
+        console.log(data);
+        dispatch(addChatMessage({...data}))
+      
+    } catch (error) {
+      console.log(error);
+    }
   };
-  //   const { user } = useSelector((store) => store.user);
 
-  //   console.log(user.user.name);
-  //   console.log(user.user);
+
   return (
     <Wrapper>
       <div className="chat-box">
@@ -37,12 +40,10 @@ const CurrentChat = () => {
           {/* <h4>{user?.user.user}</h4> */}
         </div>
         <div className="messages">
-          {currentChats?.length > 0 ? (
-            <>
-              {currentChats.map((i, idx) => {
-                return <Message key={idx} data={i} />;
-              })}
-            </>
+          {chat.messages.length > 0 ? (
+              chat.messages.map((chatMessage, i) => {
+                return <Message key={i} message={chatMessage}/>;
+              })
           ) : (
             "sorry no chats"
           )}

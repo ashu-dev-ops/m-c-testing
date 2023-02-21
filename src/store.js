@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import chatPageSlice from "./feature/ChatPageSlice";
-import user from "./feature/userPageSlice";
-// import ChatPageSlice from "./feature/ChatPageSlice";
+import userSlice from "./feature/userPageSlice";
+import chatSlice from "./feature/chatSlice";
+
+
 export const store = configureStore({
   reducer: {
-    chatpage: chatPageSlice,
-    user: user,
+    chat: chatSlice,
+    user: userSlice,
   },
 });

@@ -5,66 +5,71 @@ import { loginUser } from "../../feature/userPageSlice";
 import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
-  const navigate = useNavigate();
-  const { logIn } = useSelector((store) => store.user);
-  console.log(logIn);
-  let initialState = {
-    email: "",
-    password: "",
-  };
-  const dispatch = useDispatch();
-  const [values, setValue] = useState(initialState);
-  console.log(values);
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    console.log(name, value);
-    setValue({ ...values, [name]: value });
-  };
-  const handleSubmit = (e) => {
-    // e.target().preventDefault();
-    e.preventDefault();
-    console.log(values);
-    dispatch(loginUser({ ...values }));
-  };
-  useEffect(() => {
-    {
-      logIn && navigate("/chat-page");
-    }
-  }, [logIn]);
 
-  return (
-    <Wrapper>
-      <h1>Log in</h1>
-      <form onSubmit={handleSubmit}>
-        {/* <div className="form-row">
-          <label htmlFor="">Name</label>
-          <input type="text" className="form-input" />
-        </div> */}
-        <div className="form-row">
-          <label htmlFor="">Email</label>
-          <input
-            type="text"
-            className="form-input"
-            value={values.email}
-            onChange={handleChange}
-            name="email"
-          />
-        </div>
-        <div className="form-row">
-          <label htmlFor="">Password</label>
-          <input
-            type="text"
-            className="form-input"
-            name="password"
-            value={values.password}
-            onChange={handleChange}
-          />
-        </div>
-        <button>submit</button>
-      </form>
-    </Wrapper>
-  );
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { logIn } = useSelector((store) => store.user);
+
+    console.log(logIn);
+
+    let initialState = {
+        email: "",
+        password: "",
+    };
+    const [values, setValue] = useState(initialState);
+    console.log(values);
+
+
+    const handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        console.log(name, value);
+        values[name] = value;
+        setValue({...values});
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(values);
+        dispatch(loginUser({...values}));
+    };
+
+    useEffect(() => {
+        logIn && navigate("/chat-page");
+    }, [logIn]);
+
+    return (
+        <Wrapper>
+            <h1>Log in</h1>
+            <form onSubmit={handleSubmit}>
+                {/* <div className="form-row">
+                    <label htmlFor="">Name</label>
+                    <input type="text" className="form-input" />
+                </div> */}
+                <div className="form-row">
+                    <label htmlFor="">Email</label>
+                    <input
+                        type="text"
+                        className="form-input"
+                        value={values.email}
+                        onChange={handleChange}
+                        name="email"
+                    />
+                </div>
+                <div className="form-row">
+                    <label htmlFor="">Password</label>
+                    <input
+                        type="text"
+                        className="form-input"
+                        name="password"
+                        value={values.password}
+                        onChange={handleChange}
+                    />
+                </div>
+                <button>submit</button>
+            </form>
+        </Wrapper>
+    );
 };
 const Wrapper = styled.section`
   button {

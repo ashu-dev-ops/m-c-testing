@@ -1,34 +1,32 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
+
 const initialState = {
-  logIn: false,
-  user: "",
-  chats: [],
+  Id: "",
+  messages: [],
 };
-const counterSlice = createSlice({
-  name: "counter",
-  initialState: {
-    value: 0,
-  },
+
+
+const chatSlice = createSlice({
+  name: "chat",
+  initialState: initialState,
   reducers: {
-    incremented: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
+    addChatMessage: (state, { payload }) => {
+      console.log("chat message");
+      console.log(payload);
+      state.messages.push(payload);
     },
-    decremented: (state) => {
-      state.value -= 1;
+    setChatMessages: (state, { payload }) => {
+      console.log("chatSlice");
+      console.log(payload);
+      state.messages = payload;
     },
-    setChatFromReducer: (state, { payload: { data } }) => {
-      console.log(data);
-      state.chats = [data];
-    },
+    setChatId: (state, { payload }) => {
+      console.log("chatSlice2");
+      console.log(payload);
+      state.Id = payload;
+    }
   },
 });
 
-export const { incremented, decremented , setChatFromReducer} = counterSlice.actions;
-
-const store = configureStore({
-  reducer: counterSlice.reducer,
-});
+export const { setChatId, setChatMessages, addChatMessage} = chatSlice.actions;
+export default chatSlice.reducer;
