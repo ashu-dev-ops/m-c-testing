@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import dummuPic from "../../assets/dummy-pic.jpeg";
 import { useDispatch, useSelector } from "react-redux";
-import { setChatId, setChatMessages } from "../../feature/chatSlice";
+import { setChatId, setChatMessages } from "../../../../store/slices/chatSlice";
 
 
 
@@ -14,7 +14,7 @@ const PersonCard = (props) => {
 
 
   const getUser = async () => {
-    const otherUser = props.members[0] == user.userId ? props.members[1] : props.members[0];
+    const otherUser = props.members[0] === user.userId ? props.members[1] : props.members[0];
     const { data } = await axios.get(
       `http://localhost:3000/api/user/update-user/${otherUser}`
     );

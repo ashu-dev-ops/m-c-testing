@@ -1,5 +1,5 @@
 import React from "react";
-import GroupChatCard from "../../../../components/helper/GroupChatCard";
+import GroupChatCard from "./cards/GroupChatCard";
 import styled from "styled-components";
 
 const GroupChats = () => {

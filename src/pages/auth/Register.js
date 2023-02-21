@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../feature/userPageSlice";
+import { registerUser } from "../../store/slices/userPageSlice";
 import { useNavigate } from "react-router-dom";
 // import { ToastContainer, toast} from "react-toastify";
 // import 'react-toastify/dist/ReactToastify.css';
@@ -35,9 +35,7 @@ const Register = () => {
     };
 
     useEffect(() => {
-        {
-            logIn && navigate("/chat-page");
-        }
+        logIn && navigate("/chat-page");
     }, [logIn]);
 
     return (

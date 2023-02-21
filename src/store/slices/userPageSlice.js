@@ -1,6 +1,5 @@
 import {
     createSlice,
-    configureStore,
     createAsyncThunk,
 } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -9,13 +8,14 @@ import {
     addUserToLocalStorage,
     getUserFromLocalStorage,
     removeUserFromLocalStorage,
-} from "../util/localStorage";
+} from "../../util/localStorage";
 
 
+const localStorageUser = getUserFromLocalStorage();
 
 const initialState = {
-    logIn: false,
-    user: getUserFromLocalStorage().user,
+    logIn: localStorageUser.token ? true : false,
+    user: localStorageUser.user,
     //   user: {},
 };
 

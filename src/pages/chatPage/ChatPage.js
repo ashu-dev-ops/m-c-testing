@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import PersonCard from "../../components/helper/PersonCard";
 import { BiGroup } from "react-icons/bi";
 import { BsFillChatDotsFill, BsSearch } from "react-icons/bs";
-import ChatBody from "./components/chatBody";
+import ChatBody from "./chatBody";
 import CurrentChatMessages from "./CurrentChatMessages";
 
 

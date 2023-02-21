@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../feature/userPageSlice";
+import { loginUser } from "../../store/slices/userPageSlice";
 import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {

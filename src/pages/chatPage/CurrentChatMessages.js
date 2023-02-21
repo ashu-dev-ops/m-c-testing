@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useSelector, useDispatch} from "react-redux";
 import styled from "styled-components";
-import Message from "../../components/helper/Message";
-import { addChatMessage } from "../../feature/chatSlice";
+import Message from "./components/Message";
+import { addChatMessage } from "../../store/slices/chatSlice";
 
 
 const CurrentChat = () => {

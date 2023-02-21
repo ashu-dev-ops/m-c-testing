@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import authImg from "../../assets/auth-img-2.png";
+import authImg from "./assets/auth-img-2.png";
 // import Footer from "../../components/helper/Footer";
-import LogIn from "../../components/helper/LogIn";
-import Register from "../../components/helper/Register";
+import LogIn from "./LogIn";
+import Register from "./Register";
 
 
 const Auth = () => {

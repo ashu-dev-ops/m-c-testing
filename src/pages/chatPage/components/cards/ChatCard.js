@@ -1,35 +1,16 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import dummuPic from "../../assets/dummy-pic.jpeg";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 const ChatCard = ({ name, Id }) => {
   console.log(name + " : " + Id);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { user } = useSelector((store) => store.user);
-  // console.log(data.members[1]);
-  //   const [person, setPerson] = useState([]);
-  // console.log(data[0]);
-  //   const getUser = async () => {
-  //     const { data } = await axios.get(
-  //       `http://localhost:3000/api/user/update-user/${n1.members[0]}`
-  //     );
-  //     setPerson(data);
-  //     console.log(n1._id);
-  //   };
-  //   useEffect(() => {
-  //     getUser();
-  //   }, []);
-  // console.log(data[1]);
-  //   const fetchChat = async () => {
-  //     const { data } = await axios.get(
-  //       `http://localhost:3000/api/message/${n1._id}`
-  //     );
-  //     // console.log(data);
-  //     dispatch(setCurrentChats(data));
-  //   };
+
+  
   const onChat = async () => {
     try {
       console.log(user)

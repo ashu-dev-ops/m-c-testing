@@ -1,8 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import RecentChats from "./sub components/recentChats";
-import GroupChats from "./sub components/GroupChats";
-import SearchUsers from "./sub components/SearchUsers";
+// import { useSelector } from "react-redux";
+import RecentChats from "./components/recentChats";
+import GroupChats from "./components/GroupChats";
+import SearchUsers from "./components/SearchUsers";
 
 const ChatBody = (props) => {
   return (

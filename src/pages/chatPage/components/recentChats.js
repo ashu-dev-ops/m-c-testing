@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import PersonCard from "../../../../components/helper/PersonCard";
+import { useSelector } from "react-redux";
+import PersonCard from "./cards/PersonCard";
 
 
 const RecentChats = () => {
@@ -28,8 +28,8 @@ const RecentChats = () => {
     if (chats) {
         return (
             <div>
-                {chats.map(({ members, _id }) => {
-                    return <PersonCard members={members} chatId={_id} />;
+                {chats.map(({ members, _id }, i) => {
+                    return <PersonCard key={i} members={members} chatId={_id} />;
                 })}
             </div>
         );
