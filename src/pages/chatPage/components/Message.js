@@ -2,28 +2,17 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-const Message = ({ own, data }) => {
-  //   if (data) {
-  //     const { text } = data[0];
-  //   }
+
+const Message = ({ message }) => {
+
   const { user } = useSelector((store) => store.user);
-  console.log(data);
-  const { text, senderId } = data;
-  if (senderId === user.user.id) {
-    return (
-      <Wrapper>
-        <div className="message own">
-          {/* <div className="msg-top">name</div> */}
-          <div className="msg-bottom">{data ? text : ""}</div>
-        </div>
-      </Wrapper>
-    );
-  }
+  const { text, senderId } = message;
+
   return (
     <Wrapper>
-      <div className={`${own ? "message own" : "message "} `}>
+      <div className={`${senderId === user.userId ? "message own" : "message "} `}>
         <div className="msg-top">name</div>
-        <div className="msg-bottom">{data ? text : ""}</div>
+        <div className="msg-bottom">{ text }</div>
       </div>
     </Wrapper>
   );

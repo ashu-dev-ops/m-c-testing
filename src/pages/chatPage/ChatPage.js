@@ -1,66 +1,52 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import PersonCard from "../../components/helper/PersonCard";
 import { BiGroup } from "react-icons/bi";
 import { BsFillChatDotsFill, BsSearch } from "react-icons/bs";
-import Show from "./Show";
-import { useDispatch, useSelector } from "react-redux";
-// import { handleChatBar } from "../../feature/ChatPageSlice";
-import {
-  handleChatGroup,
-  handleChatPeople,
-  handleChatSearch,
-} from "../../feature/ChatPageSlice";
-import { store } from "../../store";
-import CurrentChat from "./CurrentChat";
+import ChatBody from "./chatBody";
+import CurrentChatMessages from "./CurrentChatMessages";
+
+
+
 const ChatPage = () => {
-  const personData = [
-    {
-      name: "rahul",
-      image: "",
-    },
-    {
-      name: "neha",
-      image: "",
-    },
-  ];
-  // console.log(typeof handleChatBar);
-  const [state, setState] = useState(false);
-  const dispatch = useDispatch();
-  const { search, groups, chats } = useSelector((store) => store.chatpage);
+
+  const [chatBody, setChatBody] = useState("recentChats");
+  function navHandler(pram){
+    setChatBody(pram);
+  }
+
   return (
     <Wrapper>
       <div className="container">
         <div className="left">
-          <div className="more">
+          <div className="chatNavBar">
             <button
               onClick={() => {
-                dispatch(handleChatGroup());
+                navHandler("groupChats");
               }}
             >
               <BiGroup />
             </button>
             <button
               onClick={() => {
-                dispatch(handleChatPeople());
+                navHandler("recentChats");
               }}
             >
               <BsFillChatDotsFill />
             </button>
             <button
               onClick={() => {
-                dispatch(handleChatSearch());
+                navHandler("searchUsers");
               }}
             >
               <BsSearch />
             </button>
           </div>
           <div className="list">
-            <Show />
+            <ChatBody body={chatBody}/>
           </div>
         </div>
         <div className="right">
-          <CurrentChat />
+          <CurrentChatMessages />
         </div>
       </div>
     </Wrapper>
@@ -74,7 +60,7 @@ const Wrapper = styled.section`
     .left {
       width: 30%;
       background-color: orange;
-      .more {
+      .chatNavBar {
         display: flex;
         justify-content: space-around;
         padding: 1rem;
@@ -92,8 +78,12 @@ const Wrapper = styled.section`
     }
   }
 
-  /* .more {
+  /* .chatNavBar {
     background-color: red;
   } */
 `;
 export default ChatPage;
+
+
+
+// 1. remove chatPageSlice

@@ -1,7 +1,8 @@
 import React from "react";
-import GroupChatCard from "../../components/helper/GroupChatCard";
+import GroupChatCard from "./cards/GroupChatCard";
 import styled from "styled-components";
-const GroupChat = () => {
+
+const GroupChats = () => {
   return (
     <Wrapper>
       <GroupChatCard />
@@ -11,4 +12,4 @@ const GroupChat = () => {
 const Wrapper = styled.section`
 
 `;
-export default GroupChat;
+export default GroupChats;

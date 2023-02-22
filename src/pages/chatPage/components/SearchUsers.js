@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import PersonCard from "../../components/helper/PersonCard";
+// import PersonCard from "../../components/helper/PersonCard";
 import styled from "styled-components";
 import axios from "axios";
-import ChatCard from "../../components/helper/ChatCard";
+import ChatCard from "./cards/ChatCard";
 
-const SearchUser = () => {
+const SearchUsers = () => {
   const [users, setUsers] = useState([]);
   const getAllUser = async () => {
     const { data } = await axios.get("http://localhost:3000/api/user/get-all/");
@@ -20,8 +20,8 @@ const SearchUser = () => {
         <input />
         <button>search</button>
       </div>
-      {users.map((i, idx) => {
-        return <ChatCard key={idx} data={i} />;
+      {users.map(({name, _id}, i) => {
+        return <ChatCard key={i} name={name} Id={_id} />;
       })}
     </Wrapper>
   );
@@ -51,4 +51,4 @@ const Wrapper = styled.section`
     }
   }
 `;
-export default SearchUser;
+export default SearchUsers;

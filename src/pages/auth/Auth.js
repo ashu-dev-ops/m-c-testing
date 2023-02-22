@@ -1,46 +1,50 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import authImg from "../../assets/auth-img-2.png";
+import authImg from "./assets/auth-img-2.png";
 // import Footer from "../../components/helper/Footer";
-import LogIn from "../../components/helper/LogIn";
-import Register from "../../components/helper/Register";
+import LogIn from "./LogIn";
+import Register from "./Register";
+
+
 const Auth = () => {
-  const [state, setState] = useState(false);
-  const stateHandler = () => {
-    setState(!state);
-  };
-  return (
-    <Wrapper>
-      {/* <Footer */}
-      <div className="container">
-        <div className="left">
-          <h2>
-            REGISTER AND START CHATING ON <span> TRENDEST CHAT APP</span>{" "}
-          </h2>
-          <img src={authImg} alt="" />
-        </div>
-        <div className="right">
-          <img src={authImg} alt="" />
-          <div className="form-container">
-            {state ? <LogIn /> : <Register />}
-            <div>
-              {state ? (
-                <article>
-                  <p>
-                    not a member <span onClick={stateHandler}> register</span>
-                  </p>{" "}
-                </article>
-              ) : (
-                <article>
-                  already a member <span onClick={stateHandler}> log in</span>
-                </article>
-              )}
+
+    const [state, setState] = useState(false);
+    const stateHandler = () => {
+        setState(!state);
+    };
+
+    return (
+        <Wrapper>
+            {/* <Footer */}
+            <div className="container">
+                <div className="left">
+                    <h2>
+                        REGISTER AND START CHATING ON <span> TRENDEST CHAT APP</span>{" "}
+                    </h2>
+                    <img src={authImg} alt="" />
+                </div>
+                <div className="right">
+                    <img src={authImg} alt="" />
+                    <div className="form-container">
+                        {state ? <LogIn /> : <Register />}
+                        <div>
+                            {state ? (
+                                <article>
+                                    <p>
+                                        not a member <span onClick={stateHandler}> register</span>
+                                    </p>{" "}
+                                </article>
+                            ) : (
+                                <article>
+                                    already a member <span onClick={stateHandler}> log in</span>
+                                </article>
+                            )}
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </Wrapper>
-  );
+        </Wrapper>
+    );
 };
 const Wrapper = styled.section`
   background-color: #111827;

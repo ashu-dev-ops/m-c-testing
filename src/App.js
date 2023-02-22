@@ -7,6 +7,9 @@ import ChatPage from "./pages/chatPage/ChatPage";
 import Landing from "./pages/landing/Landing";
 import "./fonts/Barlow/Barlow.font.css";
 import "./fonts/Montserrat/Montserrat.font.css"
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const App = () => {
   return (
@@ -18,6 +21,7 @@ const App = () => {
         <Route path="/chat-page" element={<ChatPage />} />
       </Routes>
       <Footer />
+      <ToastContainer/>
     </>
   );
 };
