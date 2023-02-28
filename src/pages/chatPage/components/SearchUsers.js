@@ -11,16 +11,19 @@ const SearchUsers = () => {
     setUsers(data);
     console.log(users);
   };
+
   useEffect(() => {
     getAllUser();
+    // eslint-disable-next-line
   }, []);
+
   return (
     <Wrapper>
       <div className="search-bar-user">
         <input />
         <button>search</button>
       </div>
-      {users.map(({name, _id}, i) => {
+      {users.map(({ name, _id }, i) => {
         return <ChatCard key={i} name={name} Id={_id} />;
       })}
     </Wrapper>

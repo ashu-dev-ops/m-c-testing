@@ -7,15 +7,15 @@ import SearchUsers from "./components/SearchUsers";
 const ChatBody = (props) => {
   return (
     <>
-      {
-        props.body === "recentChats" ?
-        <RecentChats/> :
-        props.body === "groupChats" ? 
-          <GroupChats/>:
-          <SearchUsers />
-      }
+      {props.body === "recentChats" ? (
+        <RecentChats />
+      ) : props.body === "groupChats" ? (
+        <GroupChats />
+      ) : (
+        <SearchUsers />
+      )}
     </>
-  )
+  );
 };
 
 export default ChatBody;

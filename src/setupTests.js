@@ -2,4 +2,21 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
+// useEffect(() => {
+//   socket.on("getMsg", (data) => {
+//     console.log("running");
+//     console.log(data);
+//     // dispatch(addChatMessage(data));
+//   });
+// }, [currentReci]);
+
+//
+// socket.on("getMsg", (data) => {
+//   console.log("running");
+//   // console.log(data);
+//   // first time add
+//   setCurrentReci(!currentReci);
+//   // dispatch(setChatMessages([...chat.messages, data]));
+//   // dispatch(addChatMessage(data));
+// });

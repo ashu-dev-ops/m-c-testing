@@ -6,9 +6,9 @@ import Footer from "./landingSections/footer";
 const Landing = () => {
   return (
     <div>
-      <Section1 class="section"/>
-      <VideoSection class="section"/>
-      <Footer />
+      <Section1 />
+      {/* <VideoSection class="section" />
+      <Footer /> */}
     </div>
   );
 };

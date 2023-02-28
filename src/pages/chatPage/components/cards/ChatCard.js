@@ -4,16 +4,14 @@ import styled from "styled-components";
 import dummuPic from "../../assets/dummy-pic.jpeg";
 import { useSelector } from "react-redux";
 
-
 const ChatCard = ({ name, Id }) => {
   console.log(name + " : " + Id);
   // const dispatch = useDispatch();
   const { user } = useSelector((store) => store.user);
 
-  
   const onChat = async () => {
     try {
-      console.log(user)
+      console.log(user);
       const { data } = await axios.post("http://localhost:3000/api/chat", {
         senderId: user.userId,
         receiverId: Id,
@@ -31,7 +29,7 @@ const ChatCard = ({ name, Id }) => {
           <h5>{name}</h5>
         </div>
 
-        <button onClick={onChat}>chat</button>
+        <button onClick={onChat}>Add to Chat</button>
       </div>
     </Wrapper>
   );

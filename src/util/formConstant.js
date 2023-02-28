@@ -1,5 +1,5 @@
-export const formRegisterData=[
-    {
-        name:""
-    }
-]
+export const formRegisterData = [
+  {
+    name: "",
+  },
+];
