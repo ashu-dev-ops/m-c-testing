@@ -12,10 +12,13 @@ const ChatCard = ({ name, Id }) => {
   const onChat = async () => {
     try {
       console.log(user);
-      const { data } = await axios.post("http://localhost:3000/api/chat", {
-        senderId: user.userId,
-        receiverId: Id,
-      });
+      const { data } = await axios.post(
+        "https://mern-chat-back.onrender.com/api/chat",
+        {
+          senderId: user.userId,
+          receiverId: Id,
+        }
+      );
       console.log(data);
     } catch (error) {
       console.log(error);

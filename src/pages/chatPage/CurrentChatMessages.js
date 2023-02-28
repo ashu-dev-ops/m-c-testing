@@ -35,7 +35,7 @@ const CurrentChat = () => {
   const [msg, setMsg] = useState("");
   const dispatch = useDispatch();
   // const [socketConnect, setSocketConnect] = useState(null);
-  const [currentReci, setCurrentReci] = useState(false);
+  // const [currentReci, setCurrentReci] = useState(false);
   const [msgArival, setMsgArival] = useState({});
   // console.log(chat);
   // console.log(user);
@@ -60,7 +60,7 @@ const CurrentChat = () => {
       // setCurrentReci(!currentReci);
       // console.log(currentReci);
       setMsgArival(data);
-      dispatch(addChatMessage(data));
+      // dispatch(addChatMessage(data));
       // dispatch(setChatMessages([...chat.messages, data]));
     });
 
@@ -82,14 +82,14 @@ const CurrentChat = () => {
   // });
 
   useEffect(() => {
-    // dispatch(addChatMessage(msgArival));
+    dispatch(addChatMessage(msgArival));
     // eslint-disable-next-line
-  }, [currentReci]);
+  }, [msgArival]);
 
   const handlMsgeSubmit = async () => {
     try {
       // console.log();
-      const { data } = await axios.post("http://localhost:3000/api/message/", {
+      const { data } = await axios.post("https://mern-chat-back.onrender.com/api/message/", {
         chatId: chat.Id,
         senderId: user.userId,
         text: msg,

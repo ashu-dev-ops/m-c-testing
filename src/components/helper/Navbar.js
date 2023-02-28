@@ -85,7 +85,7 @@ const Nav = styled.div`
   }
 
   button {
-    margin: 0px 50px;
+    margin: 0px 1rem;
   }
 `;
 
@@ -192,7 +192,15 @@ const Navbar = () => {
               <Link to="/chat-page">Chat Page</Link>
             </li>
           </ul>
-
+          <li>
+            <Link
+              to="/chat-page"
+              className="responsive-chatbtn"
+              style={{ color: "white " }}
+            >
+              Chat Page
+            </Link>
+          </li>
           <Link to="/auth">
             {logIn ? (
               <SlidingButton btn_name="log-out" onClick={handleLogOut}>

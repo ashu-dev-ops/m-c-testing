@@ -34,7 +34,7 @@ const PersonCard = (props) => {
       console.log(props.chatId);
       // fetchChatId();
       let data2 = await axios.get(
-        `http://localhost:3000/api/chat/chat-by/${props.chatId}`
+        `https://mern-chat-back.onrender.com/api/chat/chat-by/${props.chatId}`
       );
       console.log("data 2 comming");
       // console.log(data2.data.members);
@@ -45,7 +45,7 @@ const PersonCard = (props) => {
 
       console.log("data 2 end");
       const { data } = await axios.get(
-        `http://localhost:3000/api/user/update-user/${otherUser}`
+        `https://mern-chat-back.onrender.com/api/user/update-user/${otherUser}`
       );
       setPerson(data);
       // console.log(data);
@@ -89,7 +89,7 @@ const PersonCard = (props) => {
     dispatch(setChatId(props.chatId));
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/api/message/${props.chatId}`
+        `https://mern-chat-back.onrender.com/api/message/${props.chatId}`
       );
       // setTempChat(data);
       dispatch(setChatMessages(data));

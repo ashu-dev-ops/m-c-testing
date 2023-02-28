@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const LogIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { logIn } = useSelector((store) => store.user);
+  const { logIn, isLoading } = useSelector((store) => store.user);
 
   console.log(logIn);
 
@@ -35,8 +35,11 @@ const LogIn = () => {
 
   useEffect(() => {
     logIn && navigate("/chat-page");
+    // eslint-disable-next-line
   }, [logIn]);
-
+  if (isLoading) {
+    return <div className="loading"></div>;
+  }
   return (
     <Wrapper>
       <h1>Log in</h1>

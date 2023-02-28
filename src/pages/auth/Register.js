@@ -15,7 +15,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [values, setValue] = useState(initialState);
-  const { logIn } = useSelector((store) => store.user);
+  const { logIn, isLoading } = useSelector((store) => store.user);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -31,9 +31,14 @@ const Register = () => {
     dispatch(registerUser({ ...values }));
   };
 
-  // useEffect(() => {
-  //     logIn && navigate("/chat-page");
-  // }, [logIn]);
+  useEffect(() => {
+    logIn && navigate("/chat-page");
+    // eslint-disable-next-line
+  }, [logIn]);
+  console.log(isLoading);
+  if (isLoading) {
+    return <div className="loading">loading</div>;
+  }
 
   return (
     <Wrapper>

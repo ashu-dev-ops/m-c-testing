@@ -6,13 +6,14 @@ import {
   getUserFromLocalStorage,
   removeUserFromLocalStorage,
 } from "../../util/localStorage";
-import { Navigate, useNavigate } from "react-router-dom";
+// import { Navigate, useNavigate } from "react-router-dom";
 
 const localStorageUser = getUserFromLocalStorage();
 
 const initialState = {
   logIn: localStorageUser.token ? true : false,
   user: localStorageUser.user,
+  isLoading: false,
   //   user: {},
 };
 
@@ -21,7 +22,7 @@ export const registerUser = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       const resp = await axios.post(
-        "http://localhost:3000/api/auth/sign-up",
+        "https://mern-chat-back.onrender.com/api/auth/sign-up",
         user
       );
       return resp.data;
@@ -40,7 +41,8 @@ export const loginUser = createAsyncThunk(
     try {
       console.log("running");
       const resp = await axios.post(
-        "http://localhost:3000/api/auth/sign-in",
+        // https://mern-chat-back.onrender.com/
+        "https://mern-chat-back.onrender.com/api/auth/sign-in",
         user
       );
       return resp.data;
@@ -67,15 +69,19 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(registerUser.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(registerUser.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.logIn = true;
         state.user = payload.user;
-
+        state.isLoading = true;
         addUserToLocalStorage(payload);
         toast.success("Welcome " + payload.user.userName, {
           position: "bottom-right",
         });
+        state.isLoading = false;
       })
       .addCase(registerUser.rejected, (state, { payload }) => {
         let error;
@@ -89,8 +95,12 @@ const userSlice = createSlice({
           position: "bottom-right",
         });
       })
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(loginUser.fulfilled, (state, { payload }) => {
         console.log(payload);
+
         state.logIn = true;
         state.user = payload.user;
         removeUserFromLocalStorage();
@@ -98,6 +108,7 @@ const userSlice = createSlice({
         toast.success("Welcome " + payload.user.userName, {
           position: "bottom-right",
         });
+        state.isLoading = false;
         // useNavigateFun("/chat-page");
       })
       .addCase(loginUser.rejected, (state, { payload }) => {

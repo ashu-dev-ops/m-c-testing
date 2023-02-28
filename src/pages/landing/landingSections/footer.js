@@ -4,6 +4,10 @@ import Button from "../../../components/functional/Button";
 const Section = styled.div`
   width: 100vw;
   overflow: hidden;
+  @media (max-width: 600px) {
+    height: 50vh;
+    width: 100%;
+  }
 `;
 
 const BackgroundBlock = styled.div`

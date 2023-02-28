@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import authImg from "./assets/auth-img-2.png";
 // import Footer from "../../components/helper/Footer";
@@ -7,10 +8,17 @@ import Register from "./Register";
 
 const Auth = () => {
   const [state, setState] = useState(false);
+  const { isLoading } = useSelector((store) => store.user);
   const stateHandler = () => {
     setState(!state);
   };
-
+  if (isLoading) {
+    return (
+      <div className="center-page-100">
+        <div className="loading"></div>;
+      </div>
+    );
+  }
   return (
     <Wrapper>
       {/* <Footer */}
