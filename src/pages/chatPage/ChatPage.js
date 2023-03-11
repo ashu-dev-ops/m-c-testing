@@ -64,7 +64,15 @@ const Wrapper = styled.section`
       h
        */
       height: 90vh;
+      /* overflow-y: scroll; */
+
+      /* Internet Explorer 10+ */
+      -ms-overflow-style: none;
+      scrollbar-width: none;
       background-color: #292b36;
+      .list {
+      
+      }
       .chatNavBar {
         display: flex;
         justify-content: space-around;

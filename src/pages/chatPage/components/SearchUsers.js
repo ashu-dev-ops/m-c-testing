@@ -7,7 +7,9 @@ import ChatCard from "./cards/ChatCard";
 const SearchUsers = () => {
   const [users, setUsers] = useState([]);
   const getAllUser = async () => {
-    const { data } = await axios.get("https://mern-chat-back.onrender.com/api/user/get-all/");
+    const { data } = await axios.get(
+      "https://mern-chat-back.onrender.com/api/user/get-all/"
+    );
     setUsers(data);
     console.log(users);
   };
@@ -30,6 +32,10 @@ const SearchUsers = () => {
   );
 };
 const Wrapper = styled.section`
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow: hidden;
+
   .search-bar-user {
     display: flex;
     /* background-color: red; */
