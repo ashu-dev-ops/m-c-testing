@@ -188,9 +188,7 @@ const Navbar = () => {
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
-              <Link to="/chat-page">Chat Page</Link>
-            </li>
+            <li>{logIn ? <Link to="/chat-page">Chat Page</Link> : ""}</li>
           </ul>
           <li>
             <Link

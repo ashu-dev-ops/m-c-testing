@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+// import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   addUserToLocalStorage,
@@ -9,7 +10,7 @@ import {
 // import { Navigate, useNavigate } from "react-router-dom";
 
 const localStorageUser = getUserFromLocalStorage();
-
+// const navigate = useNavigate();
 const initialState = {
   logIn: localStorageUser.token ? true : false,
   user: localStorageUser.user,
@@ -87,6 +88,8 @@ const userSlice = createSlice({
         let error;
         if (typeof payload === "object") {
           //do something on error json
+          state.isLoading = false;
+          state.logIn = false;
           error = payload[Object.keys(payload)[0]];
         } else {
           error = payload;
@@ -116,6 +119,8 @@ const userSlice = createSlice({
         if (typeof payload === "object") {
           //do something on error json
           error = payload[Object.keys(payload)[0]];
+          state.isLoading = false;
+          state.logIn = false;
         } else {
           error = payload;
         }
